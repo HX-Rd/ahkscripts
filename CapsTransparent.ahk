@@ -10,9 +10,10 @@ CapsLock & s::
 WinGetClass, Class, A
 If Class = Progman
       Return
+WinGet Win_Id, ID, A
 If Needle%Win_Id% = 
 {
-	WinGet, Trans, Transparent, A
+	WinGet, Trans, Transparent, %Win_id%
 	IfEqual, Trans,, SetEnv, Trans, 255
 	List = %List%%Win_Id%,%Trans% 
 	Needle%Win_Id% = %Trans%
@@ -21,7 +22,7 @@ IfEqual, A_ThisHotkey, CapsLock & s, EnvAdd, Needle%Win_Id%, 15
 Else Needle%Win_Id% -= 15
 IfGreater, Needle%Win_Id%, 255, SetEnv, Needle%Win_Id%, 255
 IfLess, Needle%Win_Id%, 30, SetEnv, Needle%Win_Id%, 30
-Winset, Transparent,% Needle%Win_Id%, A
+Winset, Transparent,% Needle%Win_Id%, %Win_id%
 Return
 
 Exit:
